@@ -47,7 +47,7 @@ function Portfolio() {
                       <Paragraph gridArea="main">
                           My own portfolio reactive web application which showcases my skills and projects that I've completed thus far.
                         <Paragraph>
-                          Technologies/Stack: React.js, JavaScript, Express, HTML, Node.js
+                          Technologies/Stack: React.js, JavaScript, HTML, Node.js
                         </Paragraph>
                       </Paragraph>
                     </Grid>
@@ -85,9 +85,6 @@ function Portfolio() {
                       <Image gridArea="nav" src="images/hungryvery.png" fill="true" fit="contain"/>
                       <Heading level='3' gridArea="heading" textAlign="center">
                         HungryVery
-                        <a href="https://github.com/dalsontws/CS2102FoodDeliverySystem">
-                          <Button icon={<Github />} onClick={() => {}} />
-                        </a>
                       </Heading>
                       <Paragraph gridArea="main">
                         Full-Stack Web Application. Food Delivery Service.

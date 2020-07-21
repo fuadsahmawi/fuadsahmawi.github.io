@@ -36,7 +36,7 @@ function App() {
                 I am an incoming Technology Executive (SEED) at DBS.
               </Paragraph>
               <Paragraph textAlign='center'>
-                Aside from work, I'm a football junkie, and also play Floorball in my free time.
+                Aside from work, I'm a football junkie, and also play floorball in my free time.
               </Paragraph>
             </Box>  
           </Box>
