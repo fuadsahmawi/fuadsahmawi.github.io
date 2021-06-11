@@ -23,7 +23,7 @@ function App() {
           <AppBar/>
           <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
             <Box flex align='center' justify='start' pad='medium'>
-              <Heading textAlign='center' level='2'>Hello, I'm Fuad, an aspiring Software Engineer.</Heading>
+              <Heading textAlign='center' level='2'>Hello, I'm Fuad, a Software Engineer.</Heading>
               <Image src="images/displaypic.png" />
               <Heading level='3'>About</Heading>
               <Paragraph textAlign='center'>
@@ -33,9 +33,9 @@ function App() {
                 I graduated from the National University of Singapore (NUS) in 2020 with a Bachelor of Engineering (Hons) in Computer Engineering.
               </Paragraph>
               <Paragraph textAlign='center'>
-                I am an incoming Technology Executive (SEED) at DBS.
+                I am currently working in DBS as a Software Development Specialist in the Blockchain and Distributed Ledger Technology team.
               </Paragraph>
-              <Paragraph textAlign='center'>
+              <Paragraph textAlign='center' >
                 Aside from work, I'm a football junkie, and also play floorball in my free time.
               </Paragraph>
             </Box>  
