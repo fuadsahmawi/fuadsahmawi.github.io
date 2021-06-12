@@ -22,7 +22,13 @@ function App() {
       <Box fill>
         <AppBar />
         <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
-          <Box flex align="center" justify="start" pad="medium">
+          <Box
+            flex
+            align="center"
+            justify="start"
+            pad="medium"
+            animation="zoomIn"
+          >
             <Heading textAlign="center" level="2">
               Hello, I'm Fuad, a Software Engineer.
             </Heading>

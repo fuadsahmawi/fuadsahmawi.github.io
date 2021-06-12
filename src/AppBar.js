@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, Button, Header, Avatar } from "grommet";
-import { Home, Book, Contact, Projects, Briefcase } from "grommet-icons";
+import { Box, Button, Header, Text } from "grommet";
+import { Home, Book, Contact, Projects, Briefcase, Code } from "grommet-icons";
 import { Link, useLocation } from "react-router-dom";
 
 function AppBar() {
@@ -14,8 +14,14 @@ function AppBar() {
 
   return (
     <Header background="brand">
-      <Box direction="row" pad={{ left: "medium" }} align="center">
-        <Avatar src="images/displaypic.png" />
+      <Box
+        direction="row"
+        pad={{ left: "medium" }}
+        align="center"
+        animation="pulse"
+      >
+        {/* <Avatar src="images/displaypic.png" /> */}
+        <Text>fuadsahmawi</Text>
       </Box>
       <Box
         direction="row"
@@ -24,14 +30,17 @@ function AppBar() {
         <Link to="/">
           <Button icon={<Home />} active={active("/")} />
         </Link>
+        <Link to="/skills">
+          <Button icon={<Code />} active={active("/skills")} />
+        </Link>
+        <Link to="/portfolio">
+          <Button icon={<Projects />} active={active("/portfolio")} />
+        </Link>
         <Link to="/education">
           <Button icon={<Book />} active={active("/education")} />
         </Link>
         <Link to="/career">
           <Button icon={<Briefcase />} active={active("/career")} />
-        </Link>
-        <Link to="/portfolio">
-          <Button icon={<Projects />} active={active("/portfolio")} />
         </Link>
         <Link to="/contact">
           <Button icon={<Contact />} active={active("/contact")} />

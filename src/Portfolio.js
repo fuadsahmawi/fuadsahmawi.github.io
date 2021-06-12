@@ -23,7 +23,13 @@ function Portfolio() {
       <Box fill>
         <AppBar />
         <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
-          <Box flex align="center" justify="start" pad="medium">
+          <Box
+            flex
+            align="center"
+            justify="start"
+            pad="medium"
+            animation="zoomIn"
+          >
             <Heading level="2">Portfolio</Heading>
             <Heading level="3" textAlign="center">
               Portfolio Web Application

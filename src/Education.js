@@ -21,7 +21,12 @@ function Education() {
     <Grommet theme={theme} full>
       <Box fill>
         <AppBar />
-        <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
+        <Box
+          direction="row"
+          flex
+          overflow={{ horizontal: "hidden" }}
+          animation="zoomIn"
+        >
           <Box flex align="center" justify="start" pad="medium">
             <Heading level="2">Education</Heading>
             <Heading level="3" textAlign="center">

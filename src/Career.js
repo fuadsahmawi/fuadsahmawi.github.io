@@ -22,7 +22,13 @@ function Career() {
       <Box fill>
         <AppBar />
         <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
-          <Box flex align="center" justify="start" pad="medium">
+          <Box
+            flex
+            align="center"
+            justify="start"
+            pad="medium"
+            animation="zoomIn"
+          >
             <Heading level="2">Career</Heading>
             <Heading level="3" textAlign="center">
               DBS Bank

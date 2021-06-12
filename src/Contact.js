@@ -53,7 +53,13 @@ function Contact() {
       <Box fill>
         <AppBar />
         <Box direction="column" flex overflow={{ horizontal: "hidden" }}>
-          <Box flex align="center" justify="start" pad="medium">
+          <Box
+            flex
+            align="center"
+            justify="start"
+            pad="medium"
+            animation="zoomIn"
+          >
             <Heading level="2">Contact Me</Heading>
             <Heading level="3"> Have a question? Let's connect! </Heading>
             <Box align="center" pad="small">
