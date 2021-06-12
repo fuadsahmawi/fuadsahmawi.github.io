@@ -5,7 +5,7 @@ import { Linkedin, Github, MailOption } from 'grommet-icons';
 function Footer() {
     return (
         <Box pad="medium">
-            <Text>
+            <Text textAlign="center">
             © 2021, Developed and Designed by Fuad using <Anchor href="https://v2.grommet.io/" label="Grommet" />.
             </Text>
             <Text textAlign="center">
