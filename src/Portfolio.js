@@ -54,6 +54,9 @@ function Portfolio() {
             </Paragraph>
             <Heading level='3' textAlign="center">
               HungryVery
+              <a href="https://github.com/fuadsahmawi/HungryVery">
+                <Button icon={<Github />} onClick={() => {}} />
+              </a>
             </Heading>
             <Image src="images/hungryvery.png"/>
             <Paragraph>
@@ -64,6 +67,9 @@ function Portfolio() {
             </Paragraph>
             <Heading level='3' textAlign="center">
               Dance Detection
+              <a href="https://github.com/fuadsahmawi/cg3002-dance-project">
+                <Button icon={<Github />} onClick={() => {}} />
+              </a>
             </Heading>
             <Image src="images/dancedetection.png"/>
             <Paragraph textAlign="center">

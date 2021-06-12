@@ -6,7 +6,7 @@ function Footer() {
     return (
         <Box pad="medium">
             <Text textAlign="center">
-            © 2021, Developed and Designed by Fuad using <Anchor href="https://v2.grommet.io/" label="Grommet" />
+            © 2021, Developed and Designed by Fuad using <Anchor href="https://v2.grommet.io/" label="Grommet" />.
             </Text>
             <Text textAlign="center">
                 <Anchor href="http://www.linkedin.com/in/fuad-sahmawi/">
