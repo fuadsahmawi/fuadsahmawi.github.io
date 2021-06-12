@@ -19,7 +19,7 @@ function Footer() {
                     <Button icon={<MailOption />} onClick={() => {}} />
                 </Anchor>
             </Text>
-    </Box>
+        </Box>
     );
 };
 
