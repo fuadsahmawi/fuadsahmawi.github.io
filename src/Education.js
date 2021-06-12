@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grommet, Box, Heading, Paragraph, Image} from 'grommet';
 import AppBar from './AppBar.js';
+import Footer from './Footer.js';
 
 const theme = {
   global: {
@@ -55,6 +56,7 @@ function Education() {
                 GCE A Levels, Science
               </Paragraph>               
             </Paragraph>
+            <Footer/>
           </Box>  
         </Box>
       </Box>

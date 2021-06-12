@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Heading, Grommet, Image, Paragraph } from 'grommet';
 import AppBar from './AppBar.js';
+import Footer from './Footer.js';
 
 const theme = {
   global: {
@@ -38,6 +39,7 @@ function App() {
               <Paragraph textAlign='center' >
                 Aside from work, I'm a football junkie, and also play floorball in my free time.
               </Paragraph>
+              <Footer/>
             </Box>  
           </Box>
         </Box>

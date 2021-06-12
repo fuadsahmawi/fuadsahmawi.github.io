@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Grommet, Box, Heading, Button, Form, FormField, TextInput, TextArea } from 'grommet';
-import { Linkedin, Github, MailOption } from 'grommet-icons';
 import AppBar from './AppBar.js';
 import emailjs from 'emailjs-com';
 import "react-notifications/lib/notifications.css";
 import { NotificationContainer } from "react-notifications";
 import { NotificationManager } from "react-notifications";
+import Footer from './Footer.js';
 
 const theme = {
   global: {
@@ -77,17 +77,7 @@ function Contact() {
 					            />
 					          </Box>
 					        </Form>
-              				<Box direction ='row' pad='small'>
-	              				<a href="http://www.linkedin.com/in/fuad-sahmawi/">
-	              					<Button icon={<Linkedin />} onClick={() => {}} />
-	              				</a>
-	              				<a href="https://github.com/fuadsahmawi">
-	              					<Button icon={<Github />} onClick={() => {}} />
-	              				</a>
-	              				<a href="mailto:fuadsahmawi@gmail.com">
-	              				<Button icon={<MailOption />} onClick={() => {}} />
-	              				</a>
-              				</Box>
+							<Footer/>
               			</Box>
             		</Box>  
           		</Box>
