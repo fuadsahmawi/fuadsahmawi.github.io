@@ -1,11 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import Portfolio from './Portfolio';
-import Contact from './Contact';
-import Education from './Education';
-import Career from './Career';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import Portfolio from "./Portfolio";
+import Contact from "./Contact";
+import Education from "./Education";
+import Career from "./Career";
+import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter, Route } from "react-router-dom";
 
 ReactDOM.render(
@@ -16,7 +16,7 @@ ReactDOM.render(
     <Route exact path="/portfolio" component={Portfolio} />
     <Route exact path="/contact" component={Contact} />
   </BrowserRouter>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
