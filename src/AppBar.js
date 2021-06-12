@@ -20,7 +20,6 @@ function AppBar() {
         align="center"
         animation="pulse"
       >
-        {/* <Avatar src="images/displaypic.png" /> */}
         <Text>fuadsahmawi</Text>
       </Box>
       <Box
@@ -36,12 +35,6 @@ function AppBar() {
         <Link to="/portfolio">
           <Button icon={<Projects />} active={active("/portfolio")} />
         </Link>
-        {/* <Link to="/education">
-          <Button icon={<Book />} active={active("/education")} />
-        </Link>
-        <Link to="/career">
-          <Button icon={<Briefcase />} active={active("/career")} />
-        </Link> */}
         <Link to="/contact">
           <Button icon={<Contact />} active={active("/contact")} />
         </Link>
