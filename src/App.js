@@ -52,7 +52,7 @@ function App() {
               Aside from work, I'm a football junkie, and also play floorball in
               my free time.
             </Paragraph>
-            <Paragraph>
+            <Paragraph textAlign="center">
               Click to view my{" "}
               <Anchor
                 href="https://fuadsahmawi.github.io/education"
