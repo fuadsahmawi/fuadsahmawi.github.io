@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Button, Header, Text } from "grommet";
-import { Home, Book, Contact, Projects, Briefcase, Code } from "grommet-icons";
+import { Home, Contact, Projects, Code } from "grommet-icons";
 import { Link, useLocation } from "react-router-dom";
 
 function AppBar() {
@@ -36,12 +36,12 @@ function AppBar() {
         <Link to="/portfolio">
           <Button icon={<Projects />} active={active("/portfolio")} />
         </Link>
-        <Link to="/education">
+        {/* <Link to="/education">
           <Button icon={<Book />} active={active("/education")} />
         </Link>
         <Link to="/career">
           <Button icon={<Briefcase />} active={active("/career")} />
-        </Link>
+        </Link> */}
         <Link to="/contact">
           <Button icon={<Contact />} active={active("/contact")} />
         </Link>

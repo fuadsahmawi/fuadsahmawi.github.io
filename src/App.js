@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Heading, Grommet, Image, Paragraph } from "grommet";
+import { Box, Heading, Grommet, Image, Paragraph, Anchor } from "grommet";
 import AppBar from "./AppBar.js";
 import Footer from "./Footer.js";
 
@@ -51,6 +51,19 @@ function App() {
             <Paragraph textAlign="center">
               Aside from work, I'm a football junkie, and also play floorball in
               my free time.
+            </Paragraph>
+            <Paragraph>
+              Click to view my{" "}
+              <Anchor
+                href="https://fuadsahmawi.github.io/education"
+                label="educational"
+              />{" "}
+              or{" "}
+              <Anchor
+                href="https://fuadsahmawi.github.io/career"
+                label="career"
+              />{" "}
+              background.
             </Paragraph>
             <Footer />
           </Box>
