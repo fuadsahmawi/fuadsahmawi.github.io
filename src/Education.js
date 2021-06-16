@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grommet, Box, Heading, Paragraph, Image } from "grommet";
+import { Grommet, Box, Heading, Paragraph, Image as Picture } from "grommet";
 import AppBar from "./AppBar.js";
 import Footer from "./Footer.js";
 
@@ -59,7 +59,7 @@ function Education() {
               <Heading level="3" textAlign="center">
                 National University of Singapore
               </Heading>
-              <Image src="images/nus.png" />
+              <Picture src="images/nus.png" />
               <Paragraph textAlign="center">
                 <Paragraph>2016 - 2020</Paragraph>
                 <Paragraph>
@@ -70,7 +70,7 @@ function Education() {
               <Heading level="3" textAlign="center">
                 Hanyang University
               </Heading>
-              <Image src="images/hanyang.png" />
+              <Picture src="images/hanyang.png" />
               <Paragraph textAlign="center">
                 2019
                 <Paragraph>Hanyang International Summer School</Paragraph>
@@ -78,7 +78,7 @@ function Education() {
               <Heading level="3" textAlign="center">
                 Anglo-Chinese Junior College
               </Heading>
-              <Image src="images/acjc.png" />
+              <Picture src="images/acjc.png" />
               <Paragraph textAlign="center">
                 2012 - 2013
                 <Paragraph>GCE A Levels, Science</Paragraph>

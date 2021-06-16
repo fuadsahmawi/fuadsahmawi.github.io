@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Grommet, Box, Heading, Paragraph, Button, Image } from "grommet";
+import {
+  Grommet,
+  Box,
+  Heading,
+  Paragraph,
+  Button,
+  Image as Picture,
+} from "grommet";
 import { Github, Domain } from "grommet-icons";
 import AppBar from "./AppBar.js";
 import Footer from "./Footer.js";
@@ -73,7 +80,7 @@ function Portfolio() {
                   <Button icon={<Domain />} onClick={() => {}} />
                 </a>
               </Heading>
-              <Image src="images/website.png" />
+              <Picture src="images/website.png" />
               <Paragraph textAlign="center">
                 My own portfolio reactive web application which showcases my
                 skills and projects that I've completed thus far.
@@ -85,7 +92,7 @@ function Portfolio() {
               <Heading level="3" textAlign="center">
                 Mobile Vital Signs Monitoring System
               </Heading>
-              <Image src="images/mobilevitalsigns.png" />
+              <Picture src="images/mobilevitalsigns.png" />
               <Paragraph textAlign="center">
                 System which incorporates bluetooth-enabled vital signs sensors
                 communicating with microcontrollers which transfers data to a
@@ -101,7 +108,7 @@ function Portfolio() {
                   <Button icon={<Github />} onClick={() => {}} />
                 </a>
               </Heading>
-              <Image src="images/hungryvery.png" />
+              <Picture src="images/hungryvery.png" />
               <Paragraph textAlign="center">
                 Full-Stack Web Application. Food Delivery Service.
                 <Paragraph>
@@ -115,7 +122,7 @@ function Portfolio() {
                   <Button icon={<Github />} onClick={() => {}} />
                 </a>
               </Heading>
-              <Image src="images/dancedetection.png" />
+              <Picture src="images/dancedetection.png" />
               <Paragraph textAlign="center">
                 Wearable dance detection device which can detect a dance move
                 being performed by the wearer of the device.
@@ -130,7 +137,7 @@ function Portfolio() {
                   <Button icon={<Github />} onClick={() => {}} />
                 </a>
               </Heading>
-              <Image src="images/collegezone.jpeg" />
+              <Picture src="images/collegezone.jpeg" />
               <Paragraph textAlign="center">
                 CollegeZone is an application designed for a Residential College
                 4 (RC4) student to manage their contacts with other RC4

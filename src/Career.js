@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grommet, Box, Heading, Paragraph, Image } from "grommet";
+import { Grommet, Box, Heading, Paragraph, Image as Picture } from "grommet";
 import AppBar from "./AppBar.js";
 import Footer from "./Footer.js";
 
@@ -64,7 +64,7 @@ function Career() {
               <Heading level="3" textAlign="center">
                 DBS Bank
               </Heading>
-              <Image src="images/dbs.jpeg" />
+              <Picture src="images/dbs.jpeg" />
               <Paragraph textAlign="center">
                 August 2020 - Current
                 <Paragraph>Software Development Specialist</Paragraph>
@@ -72,7 +72,7 @@ function Career() {
               <Heading level="3" textAlign="center">
                 Rolls-Royce (Internship)
               </Heading>
-              <Image src="images/rolls-royce.png" />
+              <Picture src="images/rolls-royce.png" />
               <Paragraph textAlign="center">
                 January 2019 - June 2019
                 <Paragraph>IoT Technologist</Paragraph>
@@ -80,7 +80,7 @@ function Career() {
               <Heading level="3" textAlign="center">
                 Singapore Armed Forces (National Service)
               </Heading>
-              <Image src="images/saf.png" />
+              <Picture src="images/saf.png" />
               <Paragraph textAlign="center">
                 May 2014 - March 2016
                 <Paragraph>Force Sergeant</Paragraph>
