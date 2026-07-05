@@ -16,6 +16,7 @@ import {
   ProjectCard,
   Section,
   SkillCluster,
+  SystemsCube,
   TimelineItem,
 } from "./components.jsx";
 import { profile } from "./content/profile.js";
@@ -31,13 +32,13 @@ const pageTitles = {
     eyebrow: "Selected work",
     title: "Projects shaped by APIs, systems thinking, and practical product polish.",
     summary:
-      "From distributed-ledger systems to full-stack products and sensor platforms, the through-line is turning complex moving parts into something people can use.",
+      "From loyalty platforms and hackathon infrastructure to full-stack products and embedded systems, the through-line is turning complex moving parts into something people can use.",
   },
   career: {
     eyebrow: "Experience",
-    title: "Engineering across banking, distributed ledgers, IoT, and operational leadership.",
+    title: "Engineering across global commerce platforms, banking, IoT, and operational leadership.",
     summary:
-      "A career path grounded in reliable software, cross-functional delivery, and calm ownership of high-stakes systems.",
+      "A career path grounded in reliable backend systems, cross-functional delivery, and calm ownership of production software.",
   },
   education: {
     eyebrow: "Education",
@@ -49,7 +50,7 @@ const pageTitles = {
     eyebrow: "Contact",
     title: "Bring me a hard backend problem, a product idea, or something worth tinkering on.",
     summary:
-      "I am most excited by dependable APIs, distributed systems, developer tooling, and apps that turn messy workflows into clean experiences.",
+      "I am most excited by dependable APIs, loyalty and growth systems, developer tooling, and apps that turn messy workflows into clean experiences.",
   },
 };
 
@@ -86,19 +87,19 @@ function HomePage() {
       <Section
         id="workbench"
         eyebrow="Builder energy"
-        title="Outside production systems, I keep the same appetite for speed, feel, and craft."
-        summary="Go-karting, snowboarding, and tinkering with apps all scratch the same itch: feedback, control, iteration, and a little bit of nerve."
+        title="Outside production systems, I still like making things feel tighter, faster, and more useful."
+        summary="The casual version of my engineering brain is still very much alive: side projects, sports, gaming, dark-mode tools, and the small experiments that make an idea click."
       >
         <div className="split-showcase">
           <div className="showcase-media">
             <img
-              src="/images/tinkering-adventure.png"
-              alt="Dark maker desk with a laptop, hardware board, racing glove, and snowboard details"
+              src="/images/builder-studio.png"
+              alt="Dark builder desk with a laptop, sketches, hardware board, keyboard, and gaming controller"
             />
           </div>
           <div className="interest-stack">
             {profile.interests.map((interest) => (
-              <div className="interest-item" key={interest.title}>
+              <div className="interest-item reveal" key={interest.title}>
                 <span>{interest.kicker}</span>
                 <h3>{interest.title}</h3>
                 <p>{interest.copy}</p>
@@ -133,7 +134,7 @@ function Hero() {
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero-background" aria-hidden="true">
-        <img src="/images/hero-engineering.png" alt="" />
+        <img src="/images/hero-systems-command.png" alt="" />
       </div>
       <div className="hero-content">
         <div className="hero-copy">
@@ -162,7 +163,10 @@ function Hero() {
             ))}
           </div>
         </div>
-        <CodePanel />
+        <div className="hero-visuals">
+          <SystemsCube />
+          <CodePanel />
+        </div>
       </div>
     </section>
   );
@@ -267,7 +271,7 @@ function ContactPage() {
       >
         <div className="contact-layout">
           <ContactPanel />
-          <aside className="contact-card" aria-label="Contact links">
+          <aside className="contact-card reveal" aria-label="Contact links">
             <div>
               <p className="eyebrow">Find me</p>
               <h2>Signal over noise.</h2>

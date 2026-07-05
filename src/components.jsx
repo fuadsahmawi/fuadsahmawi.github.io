@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   ArrowUpRight,
   BriefcaseBusiness,
@@ -29,8 +29,35 @@ const navItems = [
   { to: "/contact", label: "Contact", icon: Mail },
 ];
 
+function useRevealAnimations() {
+  useEffect(() => {
+    const elements = Array.from(document.querySelectorAll(".reveal"));
+
+    if (!("IntersectionObserver" in window)) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.14 }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
+  }, []);
+}
+
 export function Layout({ children }) {
   const [open, setOpen] = useState(false);
+  useRevealAnimations();
 
   return (
     <div className="site-shell">
@@ -69,7 +96,7 @@ export function Layout({ children }) {
 
 export function Section({ id, eyebrow, title, summary, children }) {
   return (
-    <section className="section" id={id} aria-labelledby={`${id}-title`}>
+    <section className="section reveal" id={id} aria-labelledby={`${id}-title`}>
       <div className="section-heading">
         <p className="eyebrow">{eyebrow}</p>
         <h2 id={`${id}-title`}>{title}</h2>
@@ -82,7 +109,7 @@ export function Section({ id, eyebrow, title, summary, children }) {
 
 export function PageHeader({ eyebrow, title, summary }) {
   return (
-    <section className="page-header">
+    <section className="page-header reveal">
       <p className="eyebrow">{eyebrow}</p>
       <h1>{title}</h1>
       <p>{summary}</p>
@@ -94,7 +121,7 @@ export function FeatureCard({ title, copy, icon }) {
   const Icon = iconMap[icon] ?? Sparkles;
 
   return (
-    <article className="feature-card">
+    <article className="feature-card reveal">
       <div className="feature-icon" aria-hidden="true">
         <Icon size={20} />
       </div>
@@ -106,7 +133,7 @@ export function FeatureCard({ title, copy, icon }) {
 
 export function SkillCluster({ cluster }) {
   return (
-    <article className="skill-card">
+    <article className="skill-card reveal">
       <div className="skill-card-header">
         <p className="eyebrow">{cluster.kicker}</p>
         <h2>{cluster.name}</h2>
@@ -124,7 +151,7 @@ export function SkillCluster({ cluster }) {
 
 export function ProjectCard({ project }) {
   return (
-    <article className="project-card">
+    <article className="project-card reveal">
       <div className="project-media">
         <img src={project.image} alt={project.alt} loading="lazy" />
       </div>
@@ -157,9 +184,13 @@ export function ProjectCard({ project }) {
 
 export function TimelineItem({ item }) {
   return (
-    <article className="timeline-item">
+    <article className="timeline-item reveal">
       <div className="timeline-logo">
-        <img src={item.logo} alt="" loading="lazy" />
+        {item.logo ? (
+          <img src={item.logo} alt="" loading="lazy" />
+        ) : (
+          <span>{item.logoText ?? item.company.slice(0, 2)}</span>
+        )}
       </div>
       <div className="timeline-body">
         <p className="eyebrow">{item.period}</p>
@@ -180,10 +211,10 @@ export function TimelineItem({ item }) {
 
 export function CodePanel() {
   const lines = [
-    "const builder = {",
-    "  focus: 'backend systems',",
-    "  mode: ['ship', 'observe', 'iterate'],",
-    "  happyPlace: 'clean APIs + useful apps',",
+    "const platform = {",
+    "  tribe: 'Subscriptions & Loyalty',",
+    "  stack: ['Go', 'AWS', 'Kubernetes', 'Redis'],",
+    "  mode: ['scale', 'observe', 'mentor'],",
     "};",
   ];
 
@@ -210,6 +241,40 @@ export function CodePanel() {
             <span>{signal.label}</span>
           </div>
         ))}
+      </div>
+    </aside>
+  );
+}
+
+export function SystemsCube() {
+  const faces = [
+    { label: "API", tiles: ["cyan", "green", "amber", "cyan", "green", "cyan", "amber", "cyan", "green"] },
+    { label: "Go", tiles: ["green", "cyan", "green", "amber", "cyan", "green", "cyan", "amber", "cyan"] },
+    { label: "AWS", tiles: ["amber", "green", "cyan", "green", "amber", "cyan", "green", "cyan", "amber"] },
+    { label: "K8s", tiles: ["cyan", "amber", "green", "cyan", "cyan", "green", "amber", "green", "cyan"] },
+    { label: "SQL", tiles: ["green", "green", "cyan", "amber", "green", "cyan", "cyan", "amber", "green"] },
+    { label: "Redis", tiles: ["amber", "cyan", "green", "cyan", "amber", "green", "cyan", "green", "amber"] },
+  ];
+
+  return (
+    <aside className="systems-cube-card reveal" aria-label="Animated backend systems cube">
+      <div className="cube-stage" aria-hidden="true">
+        <div className="systems-cube">
+          {faces.map((face, index) => (
+            <div className={`cube-face face-${index + 1}`} key={face.label}>
+              <strong>{face.label}</strong>
+              <div>
+                {face.tiles.map((tile, tileIndex) => (
+                  <span className={`tile ${tile}`} key={`${face.label}-${tileIndex}`} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div>
+        <p className="eyebrow">Systems in motion</p>
+        <h2>Composable backend pieces, tuned until they feel simple.</h2>
       </div>
     </aside>
   );
@@ -266,7 +331,7 @@ export function ContactPanel() {
   }
 
   return (
-    <form className="contact-form" onSubmit={handleSubmit}>
+    <form className="contact-form reveal" onSubmit={handleSubmit}>
       <label>
         <span>Name</span>
         <input
@@ -309,7 +374,7 @@ export function ContactPanel() {
 
 export function Footer() {
   return (
-    <footer className="site-footer">
+    <footer className="site-footer reveal">
       <div>
         <strong>Fuad Sahmawi</strong>
         <span>Backend software engineer, app tinkerer, dark-mode enjoyer.</span>
