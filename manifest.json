@@ -1,9 +1,9 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Fuad",
+  "name": "Fuad Sahmawi | Backend Software Engineer",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "displaypic.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
@@ -20,7 +20,7 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff",
-  "image": "https://fuadsahmawi.github.io/images/website.png"
+  "theme_color": "#050505",
+  "background_color": "#050505",
+  "image": "https://fuadsahmawi.github.io/images/hero-engineering.png"
 }
