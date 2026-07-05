@@ -16,7 +16,7 @@ import {
   TerminalSquare,
   X,
 } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import { profile } from "./content/profile.js";
 
@@ -29,16 +29,20 @@ const navItems = [
   { to: "/contact", label: "Contact", icon: Mail },
 ];
 
-function useRevealAnimations() {
+function useRevealAnimations(trigger) {
   useEffect(() => {
     const elements = Array.from(document.querySelectorAll(".reveal"));
+    let observer;
+    let frame;
 
     if (!("IntersectionObserver" in window)) {
       elements.forEach((element) => element.classList.add("is-visible"));
       return undefined;
     }
 
-    const observer = new IntersectionObserver(
+    elements.forEach((element) => element.classList.remove("is-visible"));
+
+    observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -50,14 +54,29 @@ function useRevealAnimations() {
       { rootMargin: "0px 0px -8% 0px", threshold: 0.14 }
     );
 
-    elements.forEach((element) => observer.observe(element));
-    return () => observer.disconnect();
-  }, []);
+    frame = requestAnimationFrame(() => {
+      elements.forEach((element) => observer.observe(element));
+    });
+
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
+  }, [trigger]);
+}
+
+function useScrollToTop(trigger) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [trigger]);
 }
 
 export function Layout({ children }) {
   const [open, setOpen] = useState(false);
-  useRevealAnimations();
+  const { pathname } = useLocation();
+
+  useScrollToTop(pathname);
+  useRevealAnimations(pathname);
 
   return (
     <div className="site-shell">
