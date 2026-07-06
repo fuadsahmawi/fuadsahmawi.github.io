@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowUpRight,
   BriefcaseBusiness,
@@ -82,7 +82,7 @@ export function Layout({ children }) {
     <div className="site-shell">
       <header className="site-header">
         <NavLink className="brand" to="/" onClick={() => setOpen(false)}>
-          <span className="brand-mark">FS</span>
+          <img className="brand-mark" src="/favicon.svg" alt="" width="34" height="34" />
           <span>fuadsahmawi</span>
         </NavLink>
         <button
@@ -265,28 +265,170 @@ export function CodePanel() {
   );
 }
 
+const cubeFaces = ["front", "back", "right", "left", "top", "bottom"];
+const meshCubelets = new Set([2, 8, 15, 21, 26]);
+const sheenCubelets = new Set([4, 12, 19, 25]);
+
+const cubelets = [];
+for (let x = -1; x <= 1; x += 1) {
+  for (let y = -1; y <= 1; y += 1) {
+    for (let z = -1; z <= 1; z += 1) {
+      if (x === 0 && y === 0 && z === 0) continue;
+      const seed = (x + 1) * 9 + (y + 1) * 3 + (z + 1);
+      const finish = meshCubelets.has(seed) ? "mesh" : sheenCubelets.has(seed) ? "sheen" : "";
+      cubelets.push({ x, y, z, seed, finish });
+    }
+  }
+}
+
+function steadyTransform({ x, y, z }, rot = "") {
+  return `translate3d(calc(${x} * var(--cube-step)), calc(${y} * var(--cube-step)), calc(${z} * var(--cube-step))) ${rot}`;
+}
+
+// Coordinate permutations matching CSS rotateX/Y/Z(±90deg), so a finished
+// twist can snap back to an untwisted transform without a visible jump.
+function rotateCoords({ x, y, z }, axis, dir) {
+  if (axis === "x") return dir > 0 ? { x, y: -z, z: y } : { x, y: z, z: -y };
+  if (axis === "y") return dir > 0 ? { x: z, y, z: -x } : { x: -z, y, z: x };
+  return dir > 0 ? { x: -y, y: x, z } : { x: y, y: -x, z };
+}
+
+const twistMoves = [
+  { axis: "y", layer: -1, dir: 1 },
+  { axis: "x", layer: 1, dir: -1 },
+  { axis: "z", layer: 1, dir: 1 },
+  { axis: "y", layer: 1, dir: -1 },
+  { axis: "x", layer: -1, dir: 1 },
+  { axis: "z", layer: -1, dir: -1 },
+];
+
+const twistDuration = 900;
+const twistPause = 1900;
+
 export function SystemsCube() {
-  const faces = [
-    { label: "API", tiles: ["cyan", "green", "amber", "cyan", "green", "cyan", "amber", "cyan", "green"] },
-    { label: "Go", tiles: ["green", "cyan", "green", "amber", "cyan", "green", "cyan", "amber", "cyan"] },
-    { label: "AWS", tiles: ["amber", "green", "cyan", "green", "amber", "cyan", "green", "cyan", "amber"] },
-    { label: "K8s", tiles: ["cyan", "amber", "green", "cyan", "cyan", "green", "amber", "green", "cyan"] },
-    { label: "SQL", tiles: ["green", "green", "cyan", "amber", "green", "cyan", "cyan", "amber", "green"] },
-    { label: "Redis", tiles: ["amber", "cyan", "green", "cyan", "amber", "green", "cyan", "green", "amber"] },
-  ];
+  const cubeRef = useRef(null);
+  const cubeletRefs = useRef([]);
+
+  useEffect(() => {
+    const cube = cubeRef.current;
+    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!cube || !canHover || reducedMotion) return undefined;
+
+    cube.classList.add("follow");
+    const base = { x: -18, y: 33 };
+    const current = { ...base };
+    const target = { ...base };
+    let frame;
+
+    function onPointerMove(event) {
+      const nx = event.clientX / window.innerWidth - 0.5;
+      const ny = event.clientY / window.innerHeight - 0.5;
+      target.y = base.y + nx * 95;
+      target.x = base.x - ny * 52;
+    }
+
+    function tick() {
+      current.x += (target.x - current.x) * 0.11;
+      current.y += (target.y - current.y) * 0.11;
+      cube.style.transform = `rotateX(${current.x}deg) rotateY(${current.y}deg)`;
+      frame = requestAnimationFrame(tick);
+    }
+
+    window.addEventListener("pointermove", onPointerMove);
+    frame = requestAnimationFrame(tick);
+
+    return () => {
+      window.removeEventListener("pointermove", onPointerMove);
+      cancelAnimationFrame(frame);
+      cube.classList.remove("follow");
+      cube.style.transform = "";
+    };
+  }, []);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) return undefined;
+
+    // Each cubelet keeps its grid position plus an accumulated orientation string,
+    // so the finish and per-face shading travel with the piece like real stickers.
+    const state = cubelets.map(({ x, y, z }) => ({ x, y, z, rot: "" }));
+    let moveIndex = 0;
+    let frame;
+    let timer;
+
+    function apply(index, lead = "") {
+      const element = cubeletRefs.current[index];
+      const item = state[index];
+      if (element) {
+        element.style.transform = `${lead}${steadyTransform(item, item.rot)}`;
+      }
+    }
+
+    function runTwist() {
+      const move = twistMoves[moveIndex % twistMoves.length];
+      moveIndex += 1;
+      const members = [];
+      state.forEach((item, index) => {
+        if (item[move.axis] === move.layer) members.push(index);
+      });
+      const axisName = move.axis.toUpperCase();
+      const start = performance.now();
+
+      function step(now) {
+        const t = Math.min((now - start) / twistDuration, 1);
+        const eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        const angle = 90 * move.dir * eased;
+
+        if (t < 1) {
+          members.forEach((index) => apply(index, `rotate${axisName}(${angle}deg) `));
+          frame = requestAnimationFrame(step);
+        } else {
+          members.forEach((index) => {
+            const item = state[index];
+            const rotated = rotateCoords(item, move.axis, move.dir);
+            item.x = rotated.x;
+            item.y = rotated.y;
+            item.z = rotated.z;
+            item.rot = `rotate${axisName}(${90 * move.dir}deg) ${item.rot}`;
+            apply(index);
+          });
+          timer = setTimeout(runTwist, twistPause);
+        }
+      }
+
+      frame = requestAnimationFrame(step);
+    }
+
+    timer = setTimeout(runTwist, 1500);
+
+    return () => {
+      clearTimeout(timer);
+      cancelAnimationFrame(frame);
+      cubelets.forEach((coord, index) => {
+        const element = cubeletRefs.current[index];
+        if (element) element.style.transform = steadyTransform(coord);
+      });
+    };
+  }, []);
 
   return (
-    <aside className="systems-cube-card reveal" aria-label="Animated backend systems cube">
+    <aside className="systems-cube-card reveal" aria-label="Interactive systems cube">
       <div className="cube-stage" aria-hidden="true">
-        <div className="systems-cube">
-          {faces.map((face, index) => (
-            <div className={`cube-face face-${index + 1}`} key={face.label}>
-              <strong>{face.label}</strong>
-              <div>
-                {face.tiles.map((tile, tileIndex) => (
-                  <span className={`tile ${tile}`} key={`${face.label}-${tileIndex}`} />
-                ))}
-              </div>
+        <div className="systems-cube" ref={cubeRef}>
+          {cubelets.map(({ x, y, z, seed, finish }, index) => (
+            <div
+              className={finish ? `cubelet ${finish}` : "cubelet"}
+              key={seed}
+              ref={(element) => {
+                cubeletRefs.current[index] = element;
+              }}
+              style={{ transform: steadyTransform({ x, y, z }) }}
+            >
+              {cubeFaces.map((face) => (
+                <span className={`cf cf-${face}`} key={face} />
+              ))}
             </div>
           ))}
         </div>

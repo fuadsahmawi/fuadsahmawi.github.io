@@ -107,13 +107,15 @@ export const profile = {
       outcome:
         "Gave candidates and organizers a hosted event flow using AWS API Gateway, Lambda, and DynamoDB.",
       stack: ["JavaScript", "Node.js", "AWS API Gateway", "Lambda", "DynamoDB"],
-      links: [],
+      links: [
+        { label: "GitHub", href: "https://github.com/fuadsahmawi/aws-exchange-api" },
+      ],
     },
     {
       name: "Portfolio Web Application",
       type: "Personal platform",
       image: "/images/website.png",
-      alt: "Screenshot of Fuad Sahmawi's earlier portfolio website",
+      alt: "Screenshot of the current dark-themed portfolio homepage",
       summary:
         "A personal portfolio rebuilt from a simple React site into a sharper platform for engineering work, projects, and personality.",
       outcome:
@@ -174,7 +176,7 @@ export const profile = {
       company: "Delivery Hero / foodpanda / foodora / Yemeksepeti",
       role: "Senior Backend Software Engineer, Growth Tribe, Subscriptions & Loyalty",
       period: "Jan 2022 - Present",
-      logoText: "DH",
+      logo: "/images/delivery-hero.png",
       summary:
         "Backend engineering for global loyalty and subscription platforms across APAC, Europe, and Turkey.",
       highlights: [
@@ -189,7 +191,7 @@ export const profile = {
       company: "DBS Bank",
       role: "Software Engineer, Future Ready Technology - Blockchain",
       period: "Aug 2020 - Dec 2021",
-      logo: "/images/dbs.jpeg",
+      logo: "/images/dbs.png",
       summary:
         "Backend and internal tooling work for DBS Digital Exchange and blockchain-adjacent banking systems.",
       highlights: [
@@ -250,7 +252,7 @@ export const profile = {
       company: "University at Buffalo",
       role: "Blockchain Specialization",
       period: "Credential",
-      logoText: "UB",
+      logo: "/images/buffalo.png",
       summary:
         "Focused credential covering blockchain foundations and smart-contract-adjacent systems thinking.",
       highlights: [],
