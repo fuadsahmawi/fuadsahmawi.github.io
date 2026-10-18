@@ -1,73 +1,25 @@
 export const profile = {
   hero: {
-    lede:
-      "I build backend platforms, APIs, and production systems that stay predictable at scale: clean contracts, observable flows, and enough product sense to make the whole thing feel effortless.",
-    stats: [
-      { value: "Senior", label: "backend engineering" },
-      { value: "Go/AWS/K8s", label: "cloud-native systems" },
-      { value: "5x / 80%", label: "perf and cost wins" },
-    ],
+    role: "Senior Backend Engineer",
+    org: "Delivery Hero",
+    tagline:
+      "I build backend platforms and APIs that stay predictable at scale, and the product polish that makes them feel effortless.",
   },
   links: {
     email: "fuadsahmawi@gmail.com",
     github: "https://github.com/fuadsahmawi",
     linkedin: "https://sg.linkedin.com/in/fuad-sahmawi",
   },
-  signals: [
-    { value: "Go", label: "services" },
-    { value: "API", label: "contracts" },
-    { value: "Ops", label: "ownership" },
+  about: [
+    "I'm a backend engineer in Singapore who likes the quiet parts of software: the APIs, queues, databases, and contracts that make everything else feel instant. Today I'm on the Growth tribe at Delivery Hero, building the subscription and loyalty platforms behind foodpanda, foodora, and Yemeksepeti across APAC, Europe, and Turkey.",
+    "Before that I built custodian services for DBS Digital Exchange, prototyped IoT edge analytics at Rolls-Royce, and studied Computer Engineering at NUS. I care about interfaces that explain themselves, systems that scale with calm, and shipping the useful thing without making the next iteration expensive.",
+    "Off the clock: app tinkering, sports, gaming, and an unreasonable fondness for dark-mode tools.",
   ],
-  principles: [
-    {
-      icon: "api",
-      title: "Contracts before cleverness",
-      copy: "I like interfaces that explain themselves: predictable inputs, honest errors, and APIs that make integration feel boring in the best way.",
-    },
-    {
-      icon: "systems",
-      title: "Scale with calm",
-      copy: "The work I enjoy most sits where traffic, data, teams, and failure modes meet. Name the flow clearly and the system becomes easier to trust.",
-    },
-    {
-      icon: "shipping",
-      title: "Ship the useful thing",
-      copy: "I care about moving from idea to running product while keeping the engineering discipline that makes the next iteration cheaper.",
-    },
-  ],
-  workflow: [
-    {
-      icon: "api",
-      title: "Design the contract",
-      copy: "Start with data shape, RFCs, failure modes, and developer experience before locking in the implementation.",
-    },
-    {
-      icon: "systems",
-      title: "Instrument the path",
-      copy: "Make the important journey observable with clear metrics, logs, dashboards, and incident learnings.",
-    },
-    {
-      icon: "craft",
-      title: "Polish the handoff",
-      copy: "Backend work lands better when the admin screen, docs, traces, and team rituals around it feel intentional.",
-    },
-  ],
-  interests: [
-    {
-      kicker: "Workshop",
-      title: "App tinkering",
-      copy: "I enjoy small experiments that turn a half-formed workflow into something usable, especially when the backend shape is the interesting part.",
-    },
-    {
-      kicker: "Off-hours",
-      title: "Sports and gaming",
-      copy: "I like feedback-heavy spaces where timing, composure, and small decisions compound. That shows up in how I debug, build, and iterate too.",
-    },
-    {
-      kicker: "Taste",
-      title: "Dark mode and sharp tools",
-      copy: "I am drawn to interfaces that feel focused, capable, and low-friction: the kind of software you want to keep open.",
-    },
+  metrics: [
+    { value: "14d → 1d", label: "partner onboarding" },
+    { value: "5×", label: "system performance" },
+    { value: "−80%", label: "observability cost" },
+    { value: "Millions", label: "users served globally" },
   ],
   skills: [
     {
@@ -179,6 +131,7 @@ export const profile = {
       logo: "/images/delivery-hero.png",
       summary:
         "Backend engineering for global loyalty and subscription platforms across APAC, Europe, and Turkey.",
+      stack: ["Go", "AWS", "Kubernetes", "SQL", "NoSQL", "Redis", "Datadog"],
       highlights: [
         "Architect and scale distributed loyalty microservices serving millions of users globally with Go, AWS, Kubernetes, SQL, NoSQL, and Redis.",
         "Built configurable rewards infrastructure that reduced partner onboarding from 14 days to 1 day.",
@@ -194,6 +147,7 @@ export const profile = {
       logo: "/images/dbs.png",
       summary:
         "Backend and internal tooling work for DBS Digital Exchange and blockchain-adjacent banking systems.",
+      stack: ["Java", "Spring Boot", "MariaDB", "TypeScript", "Angular", "Node.js"],
       highlights: [
         "Built backend business logic and APIs for a custodian microservice using Java, Spring Boot, SQL, and MariaDB.",
         "Developed an internal operations UI with TypeScript, Angular, Node.js, HTML, and CSS.",
@@ -207,6 +161,7 @@ export const profile = {
       logo: "/images/rolls-royce.png",
       summary:
         "Internship work at the intersection of connected systems, data, and industrial technology.",
+      stack: ["Azure IoT Edge", "Python", "USSD"],
       highlights: [
         "Explored Azure IoT Edge analytics to reduce data transmission costs.",
         "Prototyped a low-cost, low-power USSD communication method for IoT devices.",
