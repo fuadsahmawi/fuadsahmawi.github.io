@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowUpRight, Check, Copy, Github, Linkedin, Mail, Send } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { profile } from "./content/profile.js";
+import { Scramble } from "./effects.jsx";
 
 export const sections = [
   { id: "about", label: "About" },
@@ -108,7 +109,7 @@ export function SectionNav({ active }) {
     <nav className="section-nav" aria-label="Sections">
       <ol>
         {sections.map(({ id, label }, index) => (
-          <li key={id}>
+          <li key={id} className="intro-anim" style={{ "--d": index + 3 }}>
             <a
               href={`#${id}`}
               className={active === id ? "active" : undefined}
@@ -116,7 +117,7 @@ export function SectionNav({ active }) {
             >
               <span className="nav-index">{String(index + 1).padStart(2, "0")}</span>
               <span className="nav-line" aria-hidden="true" />
-              <span className="nav-label">{label}</span>
+              <Scramble className="nav-label" text={label} trigger="hover" />
             </a>
           </li>
         ))}
@@ -158,7 +159,7 @@ export function Socials() {
     <ul className="socials">
       {items.map(({ href, label, icon: Icon }) => (
         <li key={label}>
-          <a href={href} aria-label={label} title={label}>
+          <a href={href} aria-label={label} title={label} data-magnetic>
             <Icon size={18} aria-hidden="true" />
           </a>
         </li>
@@ -172,7 +173,7 @@ export function Section({ id, index, label, children }) {
     <section className="section" id={id} aria-labelledby={`${id}-label`}>
       <h2 className="section-label" id={`${id}-label`}>
         <span className="mono">{String(index).padStart(2, "0")}</span>
-        {label}
+        <Scramble text={label} />
       </h2>
       {children}
     </section>
@@ -183,8 +184,10 @@ function Chips({ items }) {
   if (!items?.length) return null;
   return (
     <ul className="chips" aria-label="Technologies">
-      {items.map((item) => (
-        <li key={item}>{item}</li>
+      {items.map((item, index) => (
+        <li key={item} style={{ "--i": index }}>
+          {item}
+        </li>
       ))}
     </ul>
   );
@@ -225,7 +228,8 @@ export function ProjectRow({ project }) {
   const [primary, ...secondary] = project.links;
 
   return (
-    <li className="row project-row reveal">
+    <li className="row project-row reveal" data-tilt>
+      <span className="glare" aria-hidden="true" />
       <div className="project-thumb">
         <img src={project.image} alt={project.alt} loading="lazy" />
       </div>
@@ -288,7 +292,7 @@ export function CopyEmail() {
   }
 
   return (
-    <button className="button primary" type="button" onClick={copy}>
+    <button className="button primary" type="button" onClick={copy} data-magnetic>
       {copied ? <Check size={16} aria-hidden="true" /> : <Copy size={16} aria-hidden="true" />}
       <span aria-live="polite">{copied ? "Copied to clipboard" : profile.links.email}</span>
     </button>
@@ -385,7 +389,12 @@ export function ContactForm() {
           {state === "sent" && "Message sent. Thanks!"}
           {state === "fallback" && "Opening your email client."}
         </p>
-        <button className="button secondary" type="submit" disabled={state === "sending"}>
+        <button
+          className="button secondary"
+          type="submit"
+          disabled={state === "sending"}
+          data-magnetic
+        >
           {state === "sending" ? "Sending" : "Send message"}
           <Send size={15} aria-hidden="true" />
         </button>

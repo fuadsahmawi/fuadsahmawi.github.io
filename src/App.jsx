@@ -16,6 +16,15 @@ import {
   useActiveSection,
   useRevealAnimations,
 } from "./components.jsx";
+import {
+  CustomCursor,
+  NetworkCanvas,
+  Scramble,
+  ScrollProgress,
+  SplitText,
+  useMagnetic,
+  useTilt,
+} from "./effects.jsx";
 import { profile } from "./content/profile.js";
 
 const sectionIds = sections.map((section) => section.id);
@@ -25,6 +34,8 @@ function App() {
   const { hash } = useLocation();
   const active = useActiveSection(sectionIds);
   useRevealAnimations();
+  useMagnetic();
+  useTilt();
 
   // Legacy routes redirect here with a hash; jump to that section on load.
   useEffect(() => {
@@ -34,24 +45,29 @@ function App() {
 
   return (
     <div className="shell">
+      <NetworkCanvas />
       <Spotlight />
+      <ScrollProgress />
+      <CustomCursor />
       <a className="skip-link" href="#content">
         Skip to content
       </a>
       <div className="layout">
         <header className="intro">
           <div>
-            <a className="brand" href="#top" aria-label="Back to top">
+            <a className="brand intro-anim" href="#top" aria-label="Back to top" data-magnetic>
               <img src="/favicon.svg" alt="" width="40" height="40" />
             </a>
-            <h1 id="top">Fuad Sahmawi</h1>
-            <p className="intro-role">
+            <h1 id="top" aria-label="Fuad Sahmawi">
+              <SplitText text="Fuad Sahmawi" />
+            </h1>
+            <p className="intro-role intro-anim" style={{ "--d": 1 }}>
               {profile.hero.role} <span>at {profile.hero.org}</span>
             </p>
-            <p className="intro-tagline">{profile.hero.tagline}</p>
+            <p className="intro-tagline intro-anim" style={{ "--d": 2 }}>{profile.hero.tagline}</p>
             <SectionNav active={active} />
           </div>
-          <div className="intro-foot">
+          <div className="intro-foot intro-anim" style={{ "--d": 9 }}>
             <Socials />
             <LocalTime />
           </div>
@@ -65,10 +81,12 @@ function App() {
               ))}
             </div>
             <dl className="metrics reveal">
-              {profile.metrics.map((metric) => (
+              {profile.metrics.map((metric, index) => (
                 <div key={metric.label}>
                   <dt>{metric.label}</dt>
-                  <dd>{metric.value}</dd>
+                  <dd>
+                    <Scramble text={metric.value} delay={index * 120} />
+                  </dd>
                 </div>
               ))}
             </dl>
@@ -80,7 +98,7 @@ function App() {
                 <TimelineRow key={item.company} item={item} />
               ))}
             </ol>
-            <a className="text-link reveal" href={profile.links.linkedin}>
+            <a className="text-link reveal" href={profile.links.linkedin} data-magnetic>
               Full history on LinkedIn
               <ArrowUpRight size={15} aria-hidden="true" />
             </a>
@@ -92,7 +110,7 @@ function App() {
                 <ProjectRow key={project.name} project={project} />
               ))}
             </ol>
-            <a className="text-link reveal" href={profile.links.github}>
+            <a className="text-link reveal" href={profile.links.github} data-magnetic>
               More on GitHub
               <ArrowUpRight size={15} aria-hidden="true" />
             </a>
